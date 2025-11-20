@@ -5,11 +5,14 @@ import { Carousel } from './components/carousel/carousel';
 import { ListaLibros } from './components/lista-libros/lista-libros';
 import { Libro, LibrosService } from './services/libros';
 import { Landing } from './components/landing/landing';
+import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Navbar, BarraUtilidades, Carousel, ListaLibros, Landing],
+  imports: [Navbar, BarraUtilidades, Carousel, ListaLibros, Landing, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -17,8 +20,12 @@ export class App {
   vista: 'inicio' | 'libros' = 'inicio'; // vista actual
   titulo = '';                           // solo se muestra en "libros"
   libros: Libro[] = [];
-
-  constructor(private librosService: LibrosService) {}
+  enCafeteria = false;
+  constructor(private librosService: LibrosService, private router: Router) {
+    this.router.events.subscribe(() => {
+      this.enCafeteria = this.router.url.includes('/cafeteria');
+    });
+  }
 
   // ✅ Mostrar pantalla de inicio
   mostrarInicio() {

@@ -1,12 +1,13 @@
 import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
 import { PreguntasFrecuentes } from '../preguntas-frecuentes/preguntas-frecuentes';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
-  imports: [PreguntasFrecuentes]
+  imports: [PreguntasFrecuentes, RouterModule]
 })
 export class Navbar {
   // Eventos para comunicar con App
@@ -16,9 +17,9 @@ export class Navbar {
 
   @ViewChild(PreguntasFrecuentes) preguntas!: PreguntasFrecuentes;
 
-  enlaceActivo: 'inicio' | 'novedades' | 'masVendidos' | 'faq' | 'cuenta' = 'inicio';
+  enlaceActivo: 'inicio' | 'novedades' | 'masVendidos' | 'faq' | 'cuenta' | 'cafeteria' = 'inicio';
 
-  activar(categoria: 'inicio' | 'novedades' | 'masVendidos' | 'faq' | 'cuenta') {
+  activar(categoria: 'inicio' | 'novedades' | 'masVendidos' | 'faq' | 'cuenta' | 'cafeteria') {
     this.enlaceActivo = categoria;
 
     switch (categoria) {

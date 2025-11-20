@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <div class="container-md">
+
+    <!-- Logo y enlace a Librería -->
+    <a class="navbar-brand" routerLink="/">
+      <img src="/img/logo.webp" alt="Nexus" height="70">
+    </a>
+
+    <!-- Botón hamburguesa -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#cafeteriaNav"
+      aria-controls="cafeteriaNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú -->
+    <div id="cafeteriaNav" class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+
+        <!-- INICIO CAFETERIA -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/cafeteria"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Cafetería
+          </a>
+        </li>
+
+        <!-- REALIZAR PEDIDO -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/cafeteria/productos"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            Realizar pedido
+          </a>
+        </li>
+
+        <!-- COMPLETAR PEDIDO -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/cafeteria/checkout"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            Completar pedido
+          </a>
+        </li>
+
+        <!--  VOLVER A LIBRERÍA -->
+        <li class="nav-item ms-md-4">
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link"
+          >
+          Librería
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+

@@ -6,15 +6,8 @@
     </a>
 
     <!-- Botón hamburguesa -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -22,46 +15,36 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-            [class.active]="enlaceActivo === 'inicio'"
-            (click)="activar('inicio'); $event.preventDefault()"
-          >
+          <a class="nav-link" href="#" [class.active]="enlaceActivo === 'inicio'"
+            (click)="activar('inicio'); $event.preventDefault()">
             Inicio
           </a>
         </li>
 
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-            [class.active]="enlaceActivo === 'novedades'"
-            (click)="activar('novedades'); $event.preventDefault()"
-          >
+          <a class="nav-link" href="#" [class.active]="enlaceActivo === 'novedades'"
+            (click)="activar('novedades'); $event.preventDefault()">
             Novedades
           </a>
         </li>
 
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-            [class.active]="enlaceActivo === 'masVendidos'"
-            (click)="activar('masVendidos'); $event.preventDefault()"
-          >
+          <a class="nav-link" href="#" [class.active]="enlaceActivo === 'masVendidos'"
+            (click)="activar('masVendidos'); $event.preventDefault()">
             Más vendidos
           </a>
         </li>
 
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-            [class.active]="enlaceActivo === 'faq'"
-            (click)="activar('faq'); $event.preventDefault()"
-          >
+          <a class="nav-link" href="#" [class.active]="enlaceActivo === 'faq'"
+            (click)="activar('faq'); $event.preventDefault()">
             Preguntas frecuentes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cafeteria" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Cafetería
           </a>
         </li>
         <!-- POR AHORA EL LOGIN NO SE IMPLEMENTA ---
