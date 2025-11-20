@@ -1,0 +1,12 @@
+/* Ajuste para que las imágenes del carrusel mantengan proporciones uniformes */
+.carousel-item img {
+  object-fit: cover;
+  max-height: 420px;
+}
+
+/* Márgenes superiores en móviles para separar del navbar fijo */
+@media (max-width: 767.98px) {
+  .carousel {
+    margin-top: 2rem;
+  }
+}

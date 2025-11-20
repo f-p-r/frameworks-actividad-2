@@ -1,0 +1,30 @@
+@if (visible) {
+  <div class="modal-backdrop" (click)="cerrar()"></div>
+
+  <div class="modal-container">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="btn-cerrar" (click)="cerrar()">×</button>
+      <h4 class="mb-4">Preguntas frecuentes</h4>
+
+      <div class="accordion">
+        @for (p of preguntas; track p.id) {
+          <div class="accordion-item mb-2">
+            <button
+              class="accordion-header"
+              (click)="toggle(p)"
+              [class.activa]="p.abierta"
+            >
+              {{ p.titulo }}
+            </button>
+
+            @if (p.abierta) {
+              <div class="accordion-body">
+                <p>{{ p.respuesta }}</p>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

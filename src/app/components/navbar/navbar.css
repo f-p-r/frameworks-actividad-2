@@ -1,0 +1,42 @@
+/* Navbar fijo solo en pantallas medianas o mayores */
+@media (min-width: 768px) {
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+  }
+
+  body {
+    padding-top: 80px;
+  }
+}
+
+/* Navbar más compacto */
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 80px;
+}
+
+/* Navbar desplegable (móvil) */
+@media (max-width: 767.98px) {
+  .navbar-collapse {
+    background-color: #343a40;
+    z-index: 1030;
+  }
+
+  .nav-item {
+    padding-left: 2ch;
+  }
+}
+
+/* Colores del menú móvil */
+.navbar-collapse.show .nav-link {
+  color: #ffffff;
+}
+
+.navbar-collapse.show .nav-link:hover {
+  color: #adb5bd;
+}

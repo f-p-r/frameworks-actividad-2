@@ -1,0 +1,8 @@
+<div class="card mx-auto" [ngClass]="{ 'libro-novedad': libro.novedad }" style="cursor: pointer;">
+  <img [src]="'img/libros/' + libro.id + '.jpg'" class="card-img-top" [alt]="libro.titulo">
+  <div class="card-body text-center">
+    <h5 class="card-title">{{ libro.titulo }}</h5>
+    <p class="card-text">{{ libro.autor }}</p>
+    <p class="card-text">{{ libro.precio | precioEuro  }}</p>
+  </div>
+</div>

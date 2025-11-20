@@ -1,0 +1,59 @@
+@if (visible) {
+  <div class="modal-backdrop" (click)="cerrar()"></div>
+
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-content p-4 rounded">
+      <button class="btn-cerrar" (click)="cerrar()">×</button>
+      <h4 class="mb-4">Mi compra</h4>
+
+      @if (items.length === 0) {
+        <p class="text-center text-muted">No hay libros en la cesta.</p>
+      } @else {
+        @for (item of items; track item.libro.id) {
+          <div class="row mb-3 align-items-center border-bottom pb-2">
+            <div class="col-3 col-md-2">
+              <img
+                [src]="'img/libros/' + item.libro.id + '.jpg'"
+                [alt]="item.libro.titulo"
+                class="img-fluid rounded"
+              />
+            </div>
+
+            <div class="col-6 col-md-7">
+              <p class="fw-bold mb-1">{{ item.libro.titulo }}</p>
+              <p class="text-muted mb-1">{{ item.libro.autor }}</p>
+              <p class="mb-1">
+                Precio: {{ item.libro.precio | precioEuro }}
+              </p>
+
+              <div class="d-flex align-items-center">
+                <label class="form-label me-2 mb-0">Cantidad:</label>
+                <input
+                  type="number"
+                  min="1"
+                  [value]="item.cantidad"
+                  (input)="cambiarCantidad(item.libro.id, $any($event.target).value)"
+                  class="form-control form-control-sm w-auto"
+                />
+                <a
+                  href="#"
+                  class="text-danger ms-3 small"
+                  (click)="eliminar(item.libro.id)"
+                  >Eliminar</a
+                >
+              </div>
+            </div>
+          </div>
+        }
+
+        <div class="text-end mt-3">
+          <h5>Total: {{ total | precioEuro }}</h5>
+          <button class="btn btn-primary me-2" (click)="aplicarCompra()">
+            Aplicar
+          </button>
+          <button class="btn btn-secondary" (click)="cerrar()">Cancelar</button>
+        </div>
+      }
+    </div>
+  </div>
+}

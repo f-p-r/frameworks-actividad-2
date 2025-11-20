@@ -1,0 +1,58 @@
+/* Fondo semitransparente detrás del modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1040;
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  animation: fadeIn 0.25s forwards;
+}
+
+/* Contenedor del modal centrado */
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: #fff;
+  border-radius: 0.75rem;
+  z-index: 1050;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  animation: zoomIn 0.25s forwards;
+}
+
+/* Contenido interno */
+.modal-content {
+  background-color: #fff;
+  border-radius: 0.75rem;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Ajustes responsive */
+@media (max-width: 576px) {
+  .modal-container {
+    width: 95%;
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    padding: 0.5rem;
+  }
+}

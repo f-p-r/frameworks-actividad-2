@@ -1,0 +1,16 @@
+<app-navbar
+  (inicio)="mostrarInicio()"
+  (novedades)="onNovedades()"
+  (masVendidos)="onMasVendidos()">
+</app-navbar>
+
+<app-barra-utilidades (buscar)="onBuscar($event)"></app-barra-utilidades>
+
+@if (vista === 'inicio') {
+  <!-- Solo en la página de inicio -->
+  <app-carousel></app-carousel>
+  <app-landing></app-landing>
+} @else if (vista === 'libros') {
+  <!-- Solo cuando hay libros que mostrar -->
+  <app-lista-libros [titulo]="titulo" [libros]="libros"></app-lista-libros>
+}

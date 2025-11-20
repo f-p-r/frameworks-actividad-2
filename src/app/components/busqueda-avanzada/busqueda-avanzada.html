@@ -1,0 +1,91 @@
+@if (visible) {
+  <div class="modal-backdrop" (click)="cerrar()"></div>
+
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-content p-4 rounded">
+      <h5 class="mb-3">Búsqueda Avanzada</h5>
+
+      <form (ngSubmit)="onBuscar()">
+        <div class="mb-3">
+          <label for="titulo" class="form-label">Título</label>
+          <input
+            id="titulo"
+            [(ngModel)]="filtros.titulo"
+            name="titulo"
+            class="form-control"
+            placeholder="Título del libro"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="autor" class="form-label">Autor</label>
+          <input
+            id="autor"
+            [(ngModel)]="filtros.autor"
+            name="autor"
+            class="form-control"
+            placeholder="Autor"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="editorial" class="form-label">Editorial</label>
+          <input
+            id="editorial"
+            [(ngModel)]="filtros.editorial"
+            name="editorial"
+            class="form-control"
+            placeholder="Editorial"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="materia" class="form-label">Materia</label>
+          <select
+            id="materia"
+            [(ngModel)]="filtros.materia"
+            name="materia"
+            class="form-select"
+          >
+            <option value="">-- Selecciona una materia --</option>
+            <option value="Fantasía">Fantasía</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Romántica">Romántica</option>
+            <option value="Policíaca">Policíaca</option>
+            <option value="Juvenil">Juvenil</option>
+            <option value="Contemporánea">Contemporánea</option>
+            <option value="Infantil">Infantil</option>
+            <option value="Narrativa">Narrativa</option>
+          </select>
+        </div>
+
+        <div class="form-check mb-2">
+          <input
+            type="checkbox"
+            id="soloNovedades"
+            class="form-check-input"
+            [(ngModel)]="filtros.soloNovedades"
+            name="soloNovedades"
+          />
+          <label for="soloNovedades" class="form-check-label">Solo novedades</label>
+        </div>
+
+        <div class="form-check mb-4">
+          <input
+            type="checkbox"
+            id="soloMasVendidos"
+            class="form-check-input"
+            [(ngModel)]="filtros.soloMasVendidos"
+            name="soloMasVendidos"
+          />
+          <label for="soloMasVendidos" class="form-check-label">Solo más vendidos</label>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary w-50 me-2">Buscar</button>
+          <button type="button" class="btn btn-secondary w-50" (click)="cerrar()">Cerrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

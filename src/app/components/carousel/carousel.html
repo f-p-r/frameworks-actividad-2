@@ -1,0 +1,32 @@
+<div id="carouselExample" class="carousel slide container mt-5" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    @for (imagen of imagenes; track imagen.src) {
+      <div class="carousel-item" [class.active]="imagen === imagenes[0]">
+        <a [href]="imagen.enlace" target="_blank">
+          <img [src]="imagen.src" class="d-block w-100" [alt]="imagen.alt" />
+        </a>
+      </div>
+    }
+  </div>
+
+  <!-- Controles del carrusel -->
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>

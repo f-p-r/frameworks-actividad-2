@@ -1,0 +1,17 @@
+.card {
+  max-width: 214px;
+}
+
+.card-title {
+  font-size: 1rem;
+}
+
+.card-text {
+  font-size: 0.875rem;
+}
+
+.libro-novedad {
+  border: 3px solid #d93025; /* rojo fuerte */
+  box-shadow: 0 0 10px rgba(217, 48, 37, 0.4); /* suave resplandor */
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}

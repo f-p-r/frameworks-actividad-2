@@ -1,0 +1,28 @@
+<div class="container mt-5 mb-5">
+  <h2 class="text-center mb-4">{{ titulo }}</h2>
+
+  @if (libros && libros.length > 0) {
+    <div class="row gy-5">
+      @for (libro of libros; track libro.id) {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <app-card-libro
+            [libro]="libro"
+            (click)="verDetalle(libro)"
+          ></app-card-libro>
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="text-center text-muted mt-4">
+      No se han encontrado libros.
+    </p>
+  }
+
+  <!-- Modal de información del libro -->
+  @if (libroSeleccionado) {
+    <app-modal-libro
+      [libro]="libroSeleccionado"
+      (cerrar)="cerrarModal()"
+    ></app-modal-libro>
+  }
+</div>

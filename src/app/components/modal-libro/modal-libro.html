@@ -1,0 +1,66 @@
+@if (libro) {
+<!-- Fondo semitransparente: cierra al hacer clic fuera -->
+<div class="modal-backdrop" (click)="onCerrar()"></div>
+
+<div class="modal-container">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- 🔸 Eliminado el botón "×" del encabezado -->
+
+    <div class="row">
+      <!-- Imagen -->
+      <div class="col-md-4 text-center">
+        <img [src]="'img/libros/' + libro.id + '.jpg'" [alt]="libro.titulo" class="img-fluid rounded mb-3" />
+      </div>
+
+      <!-- Información principal -->
+      <div class="col-md-5">
+        <p [ngClass]="{ 'etiqueta-novedad': libro.novedad, 'd-none': !libro.novedad }">¡ *** Novedad *** !</p>
+        <h4>{{ libro.titulo }}</h4>
+        <p class="autor text-primary mb-4">{{ libro.autor }}</p>
+        <p class="mb-1"><strong>Editorial:</strong> {{ libro.editorial }}</p>
+        <p class="mb-1"><strong>Año de edición:</strong> {{ libro.anio }}</p>
+        <p class="mb-1"><strong>Materia:</strong> {{ libro.materia }}</p>
+        <p class="mb-1"><strong>ISBN:</strong> {{ libro.isbn }}</p>
+        <p class="mb-1"><strong>Precio:</strong> {{ libro.precio | precioEuro }}</p>
+        <hr />
+        <p [ngClass]="{'small': true, 'text-muted': true}">{{ libro.descripcion }}</p>
+      </div>
+
+      <!-- Botones -->
+      <div class="col-md-3 text-center">
+        <button class="btn btn-primary w-100 mb-2" (click)="agregarALaCesta()">
+          Añadir a la cesta
+        </button>
+        <button class="btn btn-secondary w-100" (click)="onCerrar()">
+          Volver
+        </button>
+      </div>
+    </div>
+
+    <!-- Pestañas -->
+    <ul class="nav nav-tabs mt-4">
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="pestana === 'sinopsis'" (click)="pestana = 'sinopsis'">
+          Sinopsis
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="pestana === 'resenas'" (click)="pestana = 'resenas'">
+          Reseñas
+        </button>
+      </li>
+    </ul>
+
+    <!-- Contenido de pestañas -->
+    <div class="tab-content mt-3">
+      <div class="tab-pane" [class.show]="pestana === 'sinopsis'" [class.active]="pestana === 'sinopsis'">
+        <p>{{ libro.sinopsis }}</p>
+      </div>
+
+      <div class="tab-pane" [class.show]="pestana === 'resenas'" [class.active]="pestana === 'resenas'">
+        <p [innerText]="libro.resenas"></p>
+      </div>
+    </div>
+  </div>
+</div>
+}

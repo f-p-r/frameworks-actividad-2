@@ -1,0 +1,97 @@
+/* El navbar se queda fijo en la parte superior para pantallas más anchas de md*/
+@media (min-width: 768px) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+        /* Asegura que el navbar esté por encima de otros elementos */
+    }
+}
+
+
+.cantidad {
+    width: 6ch;
+    height: 1.5rem;
+    font-size: 0.9rem;
+    padding: 0.2rem;
+}
+
+
+/* Estilo para que el label y el input de cantidad estén en la misma línea */
+.cantidad-label-container {
+    display: flex;
+    align-items: baseline; /* Alinea el texto del label con el texto del input */
+    gap: 0.5rem;
+}
+
+.eliminar-item {
+    text-decoration: none;
+}
+/***************************************************************************************
+   Corrección de estilos de bootstrap.
+***************************************************************************************/
+.accordion-button.collapsed {
+    background-color: #f8f9fa;
+  }
+
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 80px;
+}
+
+
+.navbar-collapse {
+    background-color: transparent;
+}
+
+/* Estilo para el navbar cuando es desplegable */
+@media (max-width: 767.98px) {
+    .navbar-collapse {
+        background-color: #343a40;
+        z-index: 1030;
+        /*Para que se vea encima del resto*/
+    }
+
+    .nav-item {
+        padding-left: 2ch;
+    }
+}
+
+
+/* Colores para el navbar desplegable */
+.navbar-collapse.show .nav-link {
+    color: #ffffff;
+}
+
+.navbar-collapse.show .nav-link:hover {
+    color: #adb5bd;
+}
+
+/* Estilo para las cards */
+.card {
+    max-width: 214px;
+}
+
+.card-title {
+    font-size: 1rem;
+}
+
+.card-text {
+    font-size: 0.875rem;
+}
+
+/* Fuente base para todo el texto */
+body, html {
+  font-family: Tahoma, sans-serif;
+  color: #212529;
+}
+
+/* Fuente específica para títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 700;
+  color: #212529;
+}

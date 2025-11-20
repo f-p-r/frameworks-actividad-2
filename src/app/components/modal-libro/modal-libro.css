@@ -1,0 +1,122 @@
+/* Fondo semitransparente */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1040;
+}
+
+/* Contenedor principal del modal */
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050;
+  width: 95%;
+  max-width: 900px;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  max-height: 90vh;
+  padding: 1.5rem;
+}
+
+/* Contenido interior */
+.modal-content {
+  background-color: #fff;
+}
+
+/* Título y autor */
+.modal-content h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.modal-content .autor {
+  font-style: italic;
+  color: #007bff;
+  margin-bottom: 0.75rem;
+}
+
+/* Bloque de ficha técnica */
+.modal-content p {
+  margin-bottom: 0.4rem;
+}
+
+.modal-content p strong {
+  color: #343a40;
+}
+
+/* Descripción corta */
+.modal-content .text-muted {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #6c757d !important;
+}
+
+/* Imagen */
+.modal-content img {
+  max-height: 300px;
+  object-fit: contain;
+  border: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+/* Pestañas */
+.nav-tabs .nav-link {
+  color: #6c757d;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-tabs .nav-link.active {
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
+  font-weight: 500;
+}
+
+/* Tab content */
+.tab-content {
+  padding-top: 0.75rem;
+}
+
+.tab-content p {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Botones */
+.btn {
+  border-radius: 0.3rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+/* Scroll suave en pantallas pequeñas */
+@media (max-height: 700px) {
+  .modal-container {
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+}
+
+.etiqueta-novedad {
+  color: #d93025; /* rojo intenso */
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
