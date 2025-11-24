@@ -1,1 +1,143 @@
-<p>cafeteria-checkout works!</p>
+<div class="container my-4">
+  <h2 class="mb-5 text-center" style="margin-top:120px;">Completar pedido</h2>
+
+  <!-- LISTA DE PRODUCTOS -->
+  @if (items.length === 0) {
+    <p class="text-muted">No tienes productos en tu pedido.</p>
+  } @else {
+
+    <div class="row g-3 mb-3">
+      @for (linea of items; track linea.producto.id) {
+        <div class="col-12 col-md-6">
+          <app-cafeteria-card-producto
+            [producto]="linea.producto"
+            [mostrarQuitar]="true">
+          </app-cafeteria-card-producto>
+        </div>
+      }
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
+      <h4 class="mb-0">
+        Total: {{ total | number:'1.2-2' }} €
+      </h4>
+    </div>
+  }
+
+  <!-- FORMULARIO REACTIVO -->
+  <h4 class="mt-5 mb-3">Datos de entrega y contacto</h4>
+
+  <form [formGroup]="checkoutForm"
+        (ngSubmit)="enviarPedido()"
+        class="checkout-form">
+
+    <!-- ENTREGAR EN + MESA -->
+    <div class="row g-3 mb-3 align-items-start">
+
+      <!-- Entregar en -->
+      <div class="col-12 col-md-6">
+        <label class="form-label">Entregar en</label>
+        <select class="form-select form-select-sm w-auto"
+                formControlName="entrega">
+          <option value="cafeteria">Cafetería</option>
+          <option value="coworking">Mesa coworking</option>
+        </select>
+      </div>
+
+      <!-- Mesa coworking -->
+      @if (entregaEsCoworking) {
+        <div class="col-12 col-md-6 d-flex flex-column">
+          <label class="form-label">Mesa nº</label>
+
+          <select class="form-select form-select-sm"
+                  style="max-width: 5rem;"
+                  formControlName="mesa">
+            <option value="">Seleccionar</option>
+            @for (i of mesas; track i) {
+              <option [value]="i">{{ i }}</option>
+            }
+          </select>
+
+          @if (checkoutForm.errors?.['mesaRequerida'] && checkoutForm.touched) {
+            <small class="text-danger mt-1">Selecciona una mesa</small>
+          }
+        </div>
+      }
+    </div>
+
+    <hr class="my-4">
+
+    <!-- CAMPOS DE CONTACTO -->
+    <div class="row g-3 mb-3">
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <label class="form-label">Nombre *</label>
+        <input class="form-control form-control-sm"
+               formControlName="nombre">
+
+        @if (checkoutForm.get('nombre')?.invalid &&
+             checkoutForm.get('nombre')?.touched) {
+          <small class="text-danger">Introduce un nombre válido</small>
+        }
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <label class="form-label">Email</label>
+        <input class="form-control form-control-sm"
+               formControlName="email">
+
+        @if (checkoutForm.get('email')?.invalid &&
+             checkoutForm.get('email')?.touched) {
+          <small class="text-danger">Email no válido</small>
+        }
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <label class="form-label">Teléfono</label>
+        <input class="form-control form-control-sm"
+               formControlName="telefono">
+
+        @if (checkoutForm.errors?.['contactoRequerido'] && checkoutForm.touched) {
+          <small class="text-danger">Introduce email o teléfono</small>
+        }
+      </div>
+
+    </div>
+
+    <!-- BOTONES -->
+    <div class="d-flex justify-content-start mt-4">
+
+      <button type="submit"
+              class="btn btn-primary me-4"
+              style="width: auto; padding-inline: 2rem;">
+        Enviar pedido
+      </button>
+
+      <button type="button"
+              class="btn btn-outline-danger btn-sm"
+              (click)="vaciarPedido()">
+        Vaciar pedido
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
+
+<!-- AVISO SIN PRODUCTOS -->
+@if (mostrarAvisoSinProductos) {
+  <div class="modal-backdrop-caf" (click)="cerrarAviso()"></div>
+
+  <div class="modal-container-caf">
+    <div class="modal-content-caf p-4 text-center">
+      <h5 class="mb-3">No hay productos seleccionados</h5>
+      <p>
+        No tienes ningún producto en tu pedido.<br>
+        Selecciona algún artículo desde la página de productos.
+      </p>
+      <button class="btn btn-primary mt-3"
+              (click)="irAProductos()">Aceptar</button>
+    </div>
+  </div>
+}

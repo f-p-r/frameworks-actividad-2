@@ -1,0 +1,20 @@
+.modal-backdrop-caf {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 2000;
+}
+
+.modal-container-caf {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: .5rem;
+  padding: 1rem;
+  z-index: 2001;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}

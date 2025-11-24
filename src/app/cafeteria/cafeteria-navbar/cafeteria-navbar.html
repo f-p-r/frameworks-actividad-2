@@ -1,72 +1,64 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
   <div class="container-md">
 
-    <!-- Logo y enlace a Librería -->
+    <!-- Logo -->
     <a class="navbar-brand" routerLink="/">
       <img src="/img/logo.webp" alt="Nexus" height="70">
     </a>
 
-    <!-- Botón hamburguesa -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#cafeteriaNav"
-      aria-controls="cafeteriaNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
+    <!-- Hamburguesa -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cafeteriaNav"
+      aria-controls="cafeteriaNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Menú -->
     <div id="cafeteriaNav" class="collapse navbar-collapse">
       <ul class="navbar-nav">
 
-        <!-- INICIO CAFETERIA -->
+        <!-- Cafetería -->
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/cafeteria"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
+          <a class="nav-link"
+             routerLink="/cafeteria"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">
             Cafetería
           </a>
         </li>
 
-        <!-- REALIZAR PEDIDO -->
+        <!-- Productos -->
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/cafeteria/productos"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: false }"
-          >
-            Realizar pedido
+          <a class="nav-link"
+             routerLink="/cafeteria/productos"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: false }">
+            Nuestros productos
           </a>
         </li>
 
-        <!-- COMPLETAR PEDIDO -->
+        <!-- Completar pedido -->
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/cafeteria/checkout"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: false }"
-          >
+          <a class="nav-link"
+             routerLink="/cafeteria/checkout"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: false }"
+             (click)="irACompletarPedido($event)">
             Completar pedido
+
+            @if (totalUnidades() > 0) {
+              <span class="badge bg-warning text-dark ms-1">
+                ({{ totalUnidades() }})
+              </span>
+            }
           </a>
         </li>
 
-        <!--  VOLVER A LIBRERÍA -->
+        <!-- Volver a Librería -->
         <li class="nav-item ms-md-4">
-          <a
-            routerLink="/"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="nav-link"
-          >
-          Librería
+          <a class="nav-link"
+             routerLink="/"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">
+            Librería
           </a>
         </li>
 
@@ -75,4 +67,6 @@
 
   </div>
 </nav>
+
+
 

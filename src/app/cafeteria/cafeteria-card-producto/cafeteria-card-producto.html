@@ -1,0 +1,37 @@
+<div class="card caf-card-producto h-100">
+  <img class="card-img-top caf-producto-img" [src]="imagenUrl" [alt]="producto.nombre" />
+
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title">{{ producto.nombre }}</h5>
+    <p class="card-text small flex-grow-1">
+      {{ producto.descripcion }}
+    </p>
+
+    <!-- Precio y total en la misma fila -->
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <span class="fw-bold precio">
+        {{ producto.precio | number:'1.2-2' }} €
+      </span>
+
+      @if (cantidad > 0) {
+      <span class="fw-bold total-precio">
+        Total: {{ subtotal | number:'1.2-2' }} €
+      </span>
+      }
+    </div>
+
+    <!-- Cantidad + botones (centrados) -->
+    <div class="cantidad-wrapper d-flex justify-content-center mb-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary me-2" (click)="decrementar()">
+        −
+      </button>
+
+      <input type="number" class="form-control form-control-sm text-center mx-1 caf-input-cantidad" [value]="cantidad"
+        min="0" (input)="cambiarCantidad($any($event.target).value)" />
+
+      <button type="button" class="btn btn-sm btn-outline-secondary ms-2" (click)="incrementar()">
+        +
+      </button>
+    </div>
+  </div>
+</div>

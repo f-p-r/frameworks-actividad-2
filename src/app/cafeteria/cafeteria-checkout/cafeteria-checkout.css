@@ -1,0 +1,24 @@
+/* Puedes ajustar un poco si quieres, pero con esto ya queda bien */
+.container h2 {
+  margin-bottom: 1.5rem;
+}
+
+.modal-backdrop-caf {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 2000;
+}
+
+.modal-container-caf {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: .5rem;
+  max-width: 400px;
+  width: 90%;
+  z-index: 2050;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}

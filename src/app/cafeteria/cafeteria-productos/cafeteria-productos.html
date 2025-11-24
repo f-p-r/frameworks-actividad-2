@@ -1,1 +1,26 @@
-<p>cafeteria-productos works!</p>
+<div class="container my-4">
+
+  <h2 class="mb-3 text-center" style="margin-top:120px;">Nuestros productos</h2>
+
+  <p class="text-muted text-center mb-4">
+    Selecciona aquí los productos que deseas y ajusta las cantidades usando los botones.
+    Cuando hayas terminado, dirígete a <strong>Completar pedido</strong> para revisar tu selección
+    y finalizar el pedido.
+  </p>
+
+  @for (tipo of tipos; track tipo.id) {
+    <section class="mb-4">
+      <h3 class="caf-tipo-titulo mb-3">{{ tipo.nombre }}</h3>
+
+      <div class="row g-3">
+        @for (producto of getProductosPorTipo(tipo.id); track producto.id) {
+          <div class="col-12 col-md-6">
+            <app-cafeteria-card-producto
+              [producto]="producto">
+            </app-cafeteria-card-producto>
+          </div>
+        }
+      </div>
+    </section>
+  }
+</div>
