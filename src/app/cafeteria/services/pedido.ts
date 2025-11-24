@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Producto } from './productos';
 
 export interface LineaPedido {
@@ -10,7 +11,11 @@ export interface LineaPedido {
   providedIn: 'root'
 })
 export class PedidoService {
+
   private lineas: LineaPedido[] = [];
+
+  // Notificaciones para quienes necesitan reaccionar a cambios del carrito
+  cambios$ = new Subject<void>();
 
   // Total de unidades (para navbar, etc.)
   totalUnidades = signal(0);
@@ -20,6 +25,11 @@ export class PedidoService {
     this.totalUnidades.set(total);
   }
 
+  private notificarCambios() {
+    this.cambios$.next();
+  }
+
+  // --- Getters ---
   getLineas(): LineaPedido[] {
     return this.lineas;
   }
@@ -29,6 +39,7 @@ export class PedidoService {
     return linea ? linea.cantidad : 0;
   }
 
+  // --- Acciones ---
   incrementar(producto: Producto) {
     const linea = this.lineas.find(l => l.producto.id === producto.id);
     if (linea) {
@@ -37,6 +48,7 @@ export class PedidoService {
       this.lineas.push({ producto, cantidad: 1 });
     }
     this.actualizarTotales();
+    this.notificarCambios();
   }
 
   decrementar(producto: Producto) {
@@ -44,10 +56,13 @@ export class PedidoService {
     if (idx === -1) return;
 
     this.lineas[idx].cantidad--;
+
     if (this.lineas[idx].cantidad <= 0) {
       this.lineas.splice(idx, 1);
     }
+
     this.actualizarTotales();
+    this.notificarCambios();
   }
 
   setCantidad(producto: Producto, cantidad: number) {
@@ -56,6 +71,7 @@ export class PedidoService {
     if (cantidad <= 0 || Number.isNaN(cantidad)) {
       if (idx !== -1) this.lineas.splice(idx, 1);
       this.actualizarTotales();
+      this.notificarCambios();
       return;
     }
 
@@ -64,7 +80,9 @@ export class PedidoService {
     } else {
       this.lineas[idx].cantidad = cantidad;
     }
+
     this.actualizarTotales();
+    this.notificarCambios();
   }
 
   eliminarProducto(productoId: number) {
@@ -72,6 +90,7 @@ export class PedidoService {
     if (idx !== -1) {
       this.lineas.splice(idx, 1);
       this.actualizarTotales();
+      this.notificarCambios();
     }
   }
 
@@ -85,5 +104,6 @@ export class PedidoService {
   vaciar() {
     this.lineas = [];
     this.actualizarTotales();
+    this.notificarCambios();
   }
 }

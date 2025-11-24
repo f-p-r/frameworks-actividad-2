@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PedidoService, LineaPedido } from '../services/pedido';
 import { CafeteriaCardProducto } from '../cafeteria-card-producto/cafeteria-card-producto';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cafeteria-checkout',
@@ -12,11 +13,13 @@ import { Router } from '@angular/router';
   templateUrl: './cafeteria-checkout.html',
   styleUrl: './cafeteria-checkout.css'
 })
-export class CafeteriaCheckout implements OnInit {
+export class CafeteriaCheckout implements OnInit, OnDestroy {
 
   checkoutForm!: FormGroup;
   mostrarAvisoSinProductos = false;
   mesas = Array.from({ length: 20 }, (_, i) => i + 1);
+
+  private sub!: Subscription;
 
   constructor(
     private pedidoService: PedidoService,
@@ -25,11 +28,20 @@ export class CafeteriaCheckout implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Si intenta entrar sin productos → mostrar aviso
+
+    // Si entra sin productos → aviso
     if (this.items.length === 0) {
       this.mostrarAvisoSinProductos = true;
     }
 
+    // Suscribirse a cambios del carrito
+    this.sub = this.pedidoService.cambios$.subscribe(() => {
+      if (this.items.length === 0) {
+        this.mostrarAvisoSinProductos = true;
+      }
+    });
+
+    // Formulario reactivo
     this.checkoutForm = this.fb.group({
       entrega: ['cafeteria', Validators.required],
       mesa: [null],
@@ -41,7 +53,10 @@ export class CafeteriaCheckout implements OnInit {
     });
   }
 
-  // Validación personalizada
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
+  }
+
   private contactoValidator(control: AbstractControl): ValidationErrors | null {
     const email = control.get('email')?.value;
     const telefono = control.get('telefono')?.value;
@@ -50,18 +65,13 @@ export class CafeteriaCheckout implements OnInit {
 
     const errores: any = {};
 
-    if (!email && !telefono) {
-      errores.contactoRequerido = true;
-    }
-
-    if (entrega === 'coworking' && !mesa) {
-      errores.mesaRequerida = true;
-    }
+    if (!email && !telefono) errores.contactoRequerido = true;
+    if (entrega === 'coworking' && !mesa) errores.mesaRequerida = true;
 
     return Object.keys(errores).length ? errores : null;
   }
 
-  // --- Accesores del carrito ---
+  // Accesores
   get items(): LineaPedido[] {
     return this.pedidoService.getLineas().filter(l => l.cantidad > 0);
   }
@@ -74,9 +84,8 @@ export class CafeteriaCheckout implements OnInit {
     return this.checkoutForm.get('entrega')?.value === 'coworking';
   }
 
-  // --- Acciones ---
   vaciarPedido() {
-    this.pedidoService.vaciar();
+    this.pedidoService.vaciar(); // Esto ya dispara cambios$
     this.mostrarAvisoSinProductos = true;
   }
 
@@ -87,7 +96,7 @@ export class CafeteriaCheckout implements OnInit {
     }
 
     const { entrega, mesa, nombre, email, telefono } = this.checkoutForm.value;
-    let destino = entrega === 'coworking' ? `Mesa coworking ${mesa}` : 'Cafetería';
+    const destino = entrega === 'coworking' ? `Mesa coworking ${mesa}` : 'Cafetería';
 
     alert(
       `Pedido enviado correctamente.\n\n` +

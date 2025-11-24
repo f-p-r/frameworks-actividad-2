@@ -194,7 +194,7 @@ export class ProductosService {
   /** Devuelve la URL de la imagen asociada al producto */
   getImagen(producto: Producto | number): string {
     const id = typeof producto === 'number' ? producto : producto.id;
-    return `/img/cafeteria/${id}.jpg`;
+    return `img/cafeteria/${id}.jpg`;
   }
 
   /** Devuelve los tipos de producto */
